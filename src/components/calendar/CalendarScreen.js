@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import Navbar from "../ui/Navbar";
-import "react-big-calendar/lib/css/react-big-calendar.css";
 import CalendarEvent from "./CalendarEvent";
+import CalendarModal from "./CalendarModal";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const localizer = momentLocalizer(moment);
 
@@ -69,6 +70,7 @@ const CalendarScreen = () => {
           }}
         />
       </div>
+      <CalendarModal />
     </div>
   );
 };
