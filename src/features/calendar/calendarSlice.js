@@ -37,9 +37,23 @@ export const calendarSlice = createSlice({
         ),
       };
     },
+    deleteEvent: (state) => {
+      return {
+        ...state,
+        events: state.events.filter(
+          (event) => event.id !== state.activeEvent.id
+        ),
+        activeEvent: null,
+      };
+    },
   },
 });
 
-export const { setActiveEvent, addNewEvent, clearActiveEvent, updateEvent } =
-  calendarSlice.actions;
+export const {
+  setActiveEvent,
+  addNewEvent,
+  clearActiveEvent,
+  updateEvent,
+  deleteEvent,
+} = calendarSlice.actions;
 export default calendarSlice.reducer;

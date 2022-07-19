@@ -1,11 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { clearActiveEvent } from "../../features/calendar/calendarSlice";
 import { openModal } from "../../features/ui/uiSlice";
 
 const AddNewFab = () => {
   const dispatch = useDispatch();
 
   const handleOpenModal = () => {
+    dispatch(clearActiveEvent());
     dispatch(openModal());
   };
 

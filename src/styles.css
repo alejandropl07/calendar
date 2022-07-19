@@ -74,3 +74,10 @@ body {
   position: fixed;
   right: 20px;
 }
+
+.fab-danger {
+  bottom: 20px;
+  padding: 10px;
+  position: fixed;
+  left: 20px;
+}

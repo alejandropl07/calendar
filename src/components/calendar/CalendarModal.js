@@ -50,6 +50,8 @@ const CalendarModal = () => {
   useEffect(() => {
     if (activeEvent) {
       setFormValues(activeEvent);
+    } else {
+      setFormValues(initEvent);
     }
   }, [activeEvent]);
 
@@ -125,7 +127,7 @@ const CalendarModal = () => {
       className="modal"
       overlayClassName="modal-background"
     >
-      <h1> New event </h1>
+      <h1> {activeEvent ? "Update event" : "New event"} </h1>
       <hr />
       <form className="container" onSubmit={handleSubmitForm}>
         <div className="form-group mb-2">
