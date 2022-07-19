@@ -22,12 +22,10 @@ const CalendarScreen = () => {
 
   const onDoubleClick = (e) => {
     dispatch(openModal());
-    console.log(e);
   };
 
   const onSelectEvent = (e) => {
     dispatch(setActiveEvent(e));
-    dispatch(openModal());
   };
 
   const onViewChange = (e) => {
