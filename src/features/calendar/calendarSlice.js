@@ -6,6 +6,7 @@ export const calendarSlice = createSlice({
   initialState: {
     events: [
       {
+        id: new Date().getTime(),
         title: "My birthday",
         start: moment().toDate(),
         end: moment().add(2, "hours").toDate(),
@@ -28,9 +29,17 @@ export const calendarSlice = createSlice({
     clearActiveEvent: (state) => {
       state.activeEvent = null;
     },
+    updateEvent: (state, action) => {
+      return {
+        ...state,
+        events: state.events.map((event) =>
+          event.id === action.payload.id ? action.payload : event
+        ),
+      };
+    },
   },
 });
 
-export const { setActiveEvent, addNewEvent, clearActiveEvent } =
+export const { setActiveEvent, addNewEvent, clearActiveEvent, updateEvent } =
   calendarSlice.actions;
 export default calendarSlice.reducer;

@@ -8,6 +8,7 @@ import { closeModal } from "../../features/ui/uiSlice";
 import {
   addNewEvent,
   clearActiveEvent,
+  updateEvent,
 } from "../../features/calendar/calendarSlice";
 
 const customStyles = {
@@ -96,16 +97,20 @@ const CalendarModal = () => {
       return setIsTitleValid(false);
     }
 
-    dispatch(
-      addNewEvent({
-        ...formValues,
-        id: new Date().getTime(),
-        user: {
-          _id: "123",
-          name: "Alejandro",
-        },
-      })
-    );
+    if (activeEvent) {
+      dispatch(updateEvent(formValues));
+    } else {
+      dispatch(
+        addNewEvent({
+          ...formValues,
+          id: new Date().getTime(),
+          user: {
+            _id: "123",
+            name: "Alejandro",
+          },
+        })
+      );
+    }
 
     setIsTitleValid(true);
     handleCloseModal();
