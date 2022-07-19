@@ -1,27 +1,16 @@
 import React, { useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import Navbar from "../ui/Navbar";
 import CalendarEvent from "./CalendarEvent";
 import CalendarModal from "./CalendarModal";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { useDispatch } from "react-redux";
 import { openModal } from "../../features/ui/uiSlice";
+import { setActiveEvent } from "../../features/calendar/calendarSlice";
+import AddNewFab from "../ui/AddNewFab";
 
 const localizer = momentLocalizer(moment);
-
-const events = [
-  {
-    title: "My birthday",
-    start: moment().toDate(),
-    end: moment().add(2, "hours").toDate(),
-    notes: "Party",
-    user: {
-      _id: "123",
-      name: "Alejandro",
-    },
-  },
-];
 
 const CalendarScreen = () => {
   const dispatch = useDispatch();
@@ -29,13 +18,16 @@ const CalendarScreen = () => {
     localStorage.getItem("lastView") || "month"
   );
 
+  const { events } = useSelector((state) => state.calendar);
+
   const onDoubleClick = (e) => {
     dispatch(openModal());
     console.log(e);
   };
 
   const onSelectEvent = (e) => {
-    console.log(e);
+    dispatch(setActiveEvent(e));
+    dispatch(openModal());
   };
 
   const onViewChange = (e) => {
@@ -74,6 +66,7 @@ const CalendarScreen = () => {
           }}
         />
       </div>
+      <AddNewFab />
       <CalendarModal />
     </div>
   );
