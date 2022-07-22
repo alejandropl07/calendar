@@ -7,12 +7,18 @@ export const authSlice = createSlice({
     login: (state, action) => {
       return {
         ...state,
-        checking: false,
         ...action.payload,
+        checking: false,
+      };
+    },
+    checkingFinish: (state) => {
+      return {
+        ...state,
+        checking: false,
       };
     },
   },
 });
 
-export const { login } = authSlice.actions;
+export const { login, checkingFinish } = authSlice.actions;
 export default authSlice.reducer;
