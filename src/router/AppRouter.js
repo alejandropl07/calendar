@@ -41,7 +41,7 @@ const AppRouter = () => {
               </PrivateRoute>
             }
           />
-          <Route path="/*" element={<LoginScreen />} />
+          {/* <Route path="/*" element={<LoginScreen />} /> */}
         </Routes>
       </div>
     </BrowserRouter>

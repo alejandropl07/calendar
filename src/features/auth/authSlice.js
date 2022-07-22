@@ -17,8 +17,13 @@ export const authSlice = createSlice({
         checking: false,
       };
     },
+    logout: () => {
+      return {
+        checking: false,
+      };
+    },
   },
 });
 
-export const { login, checkingFinish } = authSlice.actions;
+export const { login, checkingFinish, logout } = authSlice.actions;
 export default authSlice.reducer;
