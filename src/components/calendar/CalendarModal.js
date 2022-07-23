@@ -6,10 +6,10 @@ import DateTimePicker from "react-datetime-picker";
 import Swal from "sweetalert2";
 import { closeModal } from "../../features/ui/uiSlice";
 import {
-  addNewEvent,
   clearActiveEvent,
   updateEvent,
 } from "../../features/calendar/calendarSlice";
+import { startAddNewEvent } from "../../features/calendar/thunks";
 
 const customStyles = {
   content: {
@@ -102,16 +102,7 @@ const CalendarModal = () => {
     if (activeEvent) {
       dispatch(updateEvent(formValues));
     } else {
-      dispatch(
-        addNewEvent({
-          ...formValues,
-          id: new Date().getTime(),
-          user: {
-            _id: "123",
-            name: "Alejandro",
-          },
-        })
-      );
+      dispatch(startAddNewEvent(formValues));
     }
 
     setIsTitleValid(true);
