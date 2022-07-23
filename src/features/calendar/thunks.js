@@ -1,6 +1,7 @@
+import Swal from "sweetalert2";
 import { fetchWithToken } from "../../helpers/fetch";
 import { prepareEvents } from "../../helpers/prepareEvents";
-import { addNewEvent, loadEvents } from "./calendarSlice";
+import { addNewEvent, loadEvents, updateEvent } from "./calendarSlice";
 
 export const startAddNewEvent = (event) => {
   return async (dispatch, getState) => {
@@ -29,6 +30,22 @@ export const startLoadEvents = () => {
       const body = await resp.json();
       const events = prepareEvents(body.events);
       dispatch(loadEvents(events));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const startUpdateEvent = (event) => {
+  return async (dispatch) => {
+    try {
+      const resp = await fetchWithToken(`events/${event.id}`, event, "PUT");
+      const body = await resp.json();
+      if (body.ok) {
+        dispatch(updateEvent(event));
+      } else {
+        Swal.fire("Error", body.msg, "error");
+      }
     } catch (error) {
       console.log(error);
     }

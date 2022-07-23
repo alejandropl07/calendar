@@ -5,11 +5,11 @@ import Modal from "react-modal";
 import DateTimePicker from "react-datetime-picker";
 import Swal from "sweetalert2";
 import { closeModal } from "../../features/ui/uiSlice";
+import { clearActiveEvent } from "../../features/calendar/calendarSlice";
 import {
-  clearActiveEvent,
-  updateEvent,
-} from "../../features/calendar/calendarSlice";
-import { startAddNewEvent } from "../../features/calendar/thunks";
+  startAddNewEvent,
+  startUpdateEvent,
+} from "../../features/calendar/thunks";
 
 const customStyles = {
   content: {
@@ -100,7 +100,7 @@ const CalendarModal = () => {
     }
 
     if (activeEvent) {
-      dispatch(updateEvent(formValues));
+      dispatch(startUpdateEvent(formValues));
     } else {
       dispatch(startAddNewEvent(formValues));
     }
