@@ -1,12 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteEvent } from "../../features/calendar/calendarSlice";
+import { startDeleteEvent } from "../../features/calendar/thunks";
 
 const DeleteEventFab = () => {
   const dispatch = useDispatch();
 
   const handleDelete = () => {
-    dispatch(deleteEvent());
+    dispatch(startDeleteEvent());
   };
 
   return (

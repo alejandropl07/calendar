@@ -1,7 +1,12 @@
 import Swal from "sweetalert2";
 import { fetchWithToken } from "../../helpers/fetch";
 import { prepareEvents } from "../../helpers/prepareEvents";
-import { addNewEvent, loadEvents, updateEvent } from "./calendarSlice";
+import {
+  addNewEvent,
+  deleteEvent,
+  loadEvents,
+  updateEvent,
+} from "./calendarSlice";
 
 export const startAddNewEvent = (event) => {
   return async (dispatch, getState) => {
@@ -43,6 +48,23 @@ export const startUpdateEvent = (event) => {
       const body = await resp.json();
       if (body.ok) {
         dispatch(updateEvent(event));
+      } else {
+        Swal.fire("Error", body.msg, "error");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const startDeleteEvent = (event) => {
+  return async (dispatch, getState) => {
+    const { id } = getState().calendar.activeEvent;
+    try {
+      const resp = await fetchWithToken(`events/${id}`, {}, "DELETE");
+      const body = await resp.json();
+      if (body.ok) {
+        dispatch(deleteEvent());
       } else {
         Swal.fire("Error", body.msg, "error");
       }
