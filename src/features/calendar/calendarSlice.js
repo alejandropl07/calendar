@@ -46,6 +46,12 @@ export const calendarSlice = createSlice({
         activeEvent: null,
       };
     },
+    loadEvents: (state, action) => {
+      return {
+        ...state,
+        events: [...action.payload],
+      };
+    },
   },
 });
 
@@ -55,5 +61,6 @@ export const {
   clearActiveEvent,
   updateEvent,
   deleteEvent,
+  loadEvents,
 } = calendarSlice.actions;
 export default calendarSlice.reducer;
