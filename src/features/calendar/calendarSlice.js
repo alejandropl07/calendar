@@ -1,9 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
+import moment from "moment";
 
 export const calendarSlice = createSlice({
   name: "calendar",
   initialState: {
-    events: [],
+    events: [
+      {
+        id: new Date().getTime(),
+        title: "My birthday",
+        start: moment().toDate(),
+        end: moment().add(2, "hours").toDate(),
+        notes: "Party",
+        user: {
+          _id: "123",
+          name: "Alejandro",
+        },
+      },
+    ],
     activeEvent: null,
   },
   reducers: {
@@ -33,18 +46,6 @@ export const calendarSlice = createSlice({
         activeEvent: null,
       };
     },
-    loadEvents: (state, action) => {
-      return {
-        ...state,
-        events: [...action.payload],
-      };
-    },
-    logoutCleaner: () => {
-      return {
-        events: [],
-        activeEvent: null,
-      };
-    },
   },
 });
 
@@ -54,7 +55,5 @@ export const {
   clearActiveEvent,
   updateEvent,
   deleteEvent,
-  loadEvents,
-  logoutCleaner,
 } = calendarSlice.actions;
 export default calendarSlice.reducer;
